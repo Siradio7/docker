@@ -1,0 +1,33 @@
+services:
+
+  nginx:
+    image: nginx
+    ports:
+      - "8080:80"
+    networks:
+      - public-net
+      - app-net
+
+  frontend:
+    image: nginx
+    networks:
+      - app-net
+
+  backend:
+    image: ubuntu
+    command: tail -f /dev/null
+    networks:
+      - app-net
+      - data-net
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: testtest
+    networks:
+      - data-net
+
+networks:
+  public-net:
+  app-net:
+  data-net:
