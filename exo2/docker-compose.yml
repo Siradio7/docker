@@ -1,0 +1,19 @@
+services:
+  frontend:
+    image: nginx:latest
+    networks:
+      - front-net
+
+  backend:
+    image: ubuntu:latest
+    command: tail -f /dev/null
+    networks:
+      - front-net
+      - data-net
+
+  database:
+    image: postgres:latest
+
+networks:
+  front-net:
+  data-net:
