@@ -2,6 +2,8 @@ services:
     client:
         image: ubuntu:latest
         container_name: client
+        stdin_open: true
+        tty: true
 
     api:
         image: nginx:latest
