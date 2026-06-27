@@ -1,0 +1,42 @@
+services:
+  nginx:
+    container_name: proxy
+    build: .
+    ports:
+      - "8080:80"
+    networks:
+      - public-net
+      - app-net
+
+  frontend:
+    container_name: frontend
+    image: nginx
+    networks:
+      - app-net
+
+  backend1:
+    container_name: backend1
+    build: ./backend1
+    networks:
+      - app-net
+      - data-net
+
+  backend2:
+    container_name: backend2
+    build: ./backend2
+    networks:
+      - app-net
+      - data-net
+
+  database:
+    container_name: database
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=testtest
+    networks:
+      - data-net
+
+networks:
+  public-net:
+  app-net:
+  data-net:
