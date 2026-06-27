@@ -1,0 +1,8 @@
+services:
+    client:
+        image: ubuntu:latest
+        container_name: client
+
+    api:
+        image: nginx:latest
+        container_name: api
