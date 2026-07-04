@@ -1,0 +1,12 @@
+services:
+  web1:
+    build: ./web1
+    container_name: web1
+  web2:
+    build: ./web2
+    container_name: web2
+  nginx:
+    build: ./nginx
+    container_name: web_load_balancer
+    ports:
+      - "8080:80"
