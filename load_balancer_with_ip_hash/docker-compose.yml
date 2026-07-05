@@ -1,0 +1,18 @@
+services:
+  web1:
+    build: ./backend1
+    container_name: backend1
+  web2:
+    build: ./backend2
+    container_name: backend2
+  web3:
+    build: ./backend3
+    container_name: backend3
+  web4:
+    build: ./backend4
+    container_name: backend4
+  nginx:
+    build: ./nginx
+    container_name: backend_load_balancer
+    ports:
+      - "8080:80"
