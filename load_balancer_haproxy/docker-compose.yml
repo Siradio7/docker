@@ -1,0 +1,23 @@
+services:
+  web1:
+    image: nginx:latest
+    container_name: web1
+    volumes:
+      - ./web1:/usr/share/nginx/html:ro
+
+  web2:
+    image: nginx:latest
+    container_name: web2
+    volumes:
+      - ./web2:/usr/share/nginx/html:ro
+
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    ports:
+      - "8080:80"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - web1
+      - web2
