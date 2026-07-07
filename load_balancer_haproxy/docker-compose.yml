@@ -1,23 +1,48 @@
+version: "3.8"
+
 services:
   web1:
     image: nginx:latest
-    container_name: web1
     volumes:
       - ./web1:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - lb_net
 
   web2:
     image: nginx:latest
-    container_name: web2
     volumes:
       - ./web2:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - lb_net
 
   haproxy:
     image: haproxy:latest
-    container_name: haproxy
     ports:
       - "8080:80"
+      - "1936:1936"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    restart: unless-stopped
     depends_on:
       - web1
       - web2
+    networks:
+      - lb_net
+
+networks:
+  lb_net:
+    driver: bridge
