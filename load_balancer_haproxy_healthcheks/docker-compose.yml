@@ -1,0 +1,29 @@
+services:
+  web1:
+    build: ./web1
+    container_name: web1
+    restart: unless-stopped
+
+  web2:
+    build: ./web2
+    container_name: web2
+    restart: unless-stopped
+
+  web3:
+    build: ./web3
+    container_name: web3
+    restart: unless-stopped
+
+  proxy:
+    build: ./proxy
+    container_name: haproxy
+    ports:
+      - "8080:80"
+      - "1936:1936"
+    volumes:
+      - ./proxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    restart: unless-stopped
+    depends_on:
+      - web1
+      - web2
+      - web3
