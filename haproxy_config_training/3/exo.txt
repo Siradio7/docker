@@ -1,0 +1,19 @@
+On veut un load balancer pour une API.
+
+Besoins :
+Écouter sur le port 8080.
+Répartir les requêtes avec Round Robin.
+
+Il y a 4 serveurs :
+node1:3000
+node2:3000
+node3:3000
+node4:3000
+
+Les health checks doivent être activés.
+Maximum 5000 connexions.
+
+Les timeouts doivent être :
+connexion : 3 s
+client : 20 s
+serveur : 20 s
