@@ -1,0 +1,13 @@
+Une entreprise possède deux serveurs :
+api1:8080
+api2:8080
+
+Le premier serveur est deux fois plus puissant que le second.
+
+Le client souhaite que :
+le trafic passe par HAProxy ;
+le serveur le plus puissant reçoive environ deux fois plus de requêtes que l'autre ;
+si un serveur tombe, il ne reçoive plus de trafic.
+
+👉 Question 1 : quel algorithme de load balancing choisirais-tu ?
+👉 Question 2 : écris uniquement la section backend qui répond à ce besoin.
