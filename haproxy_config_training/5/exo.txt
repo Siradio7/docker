@@ -1,0 +1,12 @@
+Tu as une API avec 3 serveurs backend :
+api1
+api2
+api3
+
+Tu veux :
+répartir normalement la charge ;
+garder un utilisateur sur le même serveur ;
+retirer automatiquement un serveur en panne.
+
+Question :
+Quel mécanisme HAProxy utiliserais-tu et quelles options principales mettrais-tu dans le backend ?
