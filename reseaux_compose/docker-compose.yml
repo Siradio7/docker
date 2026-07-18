@@ -1,0 +1,32 @@
+services:
+  app:
+    build: ../advanced_dockerfile
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    ports:
+      - "3000:3000"
+    networks:
+      - app_network
+    depends_on:
+      db:
+        condition: service_healthy
+    
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app_network
+    
+networks:
+  app_network:
+volumes:
+  postgres_data:
